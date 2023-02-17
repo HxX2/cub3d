@@ -3,30 +3,32 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+         #
+#    By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 19:58:45 by zlafou            #+#    #+#              #
-#    Updated: 2023/02/17 22:10:06 by zlafou           ###   ########.fr        #
+#    Updated: 2023/02/17 23:26:11 by gkarib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= cub3D
 
-PARSING			= #parsing srcs
+PARSING			= utils_parsing.c valid_file.c convert_file.c component.c check_walls.c NO.c parse.c
 
-SRCS			= #srcs
+SRCS			= main.c $(PARSING)
 
 OBJS			= $(SRCS:.c=.o)
 
-CFLAGS			= -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit #-g -fsanitize=address
-
 CC				= cc
 
-VPATH 			= #dirs of all srcs
+CFLAGS			= -Wall -Wextra -Werror #-g -fsanitize=address
+
+MLX				= -lmlx -framework OpenGL -framework AppKit
+
+VPATH 			= src/Parsing
 
 HEADER			= "\033[0;35m   █▀▀ █░░█ █▀▀▄ █▀▀█ █▀▀▄ \n   █░░ █░░█ █▀▀▄ ░░▀▄ █░░█ \n   ▀▀▀ ░▀▀▀ ▀▀▀░ █▄▄█ ▀▀▀░\033[0;0m"
 
-FOOTER			= "\033[0;35m➔\033[0;0m type \033[0;34m./$(NAME)\033[0;0m to run the shell."
+FOOTER			= "\033[0;35m➔\033[0;0m type \033[0;34m./$(NAME)\033[0;0m to run the game."
 
 vpath $(SRCS) $(VPATH)
 
@@ -55,7 +57,7 @@ $(NAME): | header $(OBJS)
 	@echo "\033[0;0m"
 	@echo "\033[0;35m\033[1m────── making cub3d ──────\033[0;0m"
 	@printf "\033[2m"
-	$(CC) ${OBJS} $(CFLAGS) ./src/libft/libft.a -o ${NAME}
+	$(CC) ${OBJS} $(CFLAGS) $(MLX) ./src/libft/libft.a -o ${NAME}
 	@echo "\033[0;0"
 
 clean: | header
