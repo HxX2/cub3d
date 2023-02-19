@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:37:05 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/19 21:04:59 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/02/19 21:25:21 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 
 //     x = 0;
 //     y = 0;
-//     t_Cub *cub = malloc(sizeof(t_Cub));
+//     t_scene *cub = malloc(sizeof(t_scene));
 //     if (ac == 2)
 //     {
 //         if (parse_map(av[1], cub))

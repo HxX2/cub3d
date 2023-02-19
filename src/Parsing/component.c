@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:11:22 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/17 23:21:46 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/19 21:25:21 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	check_character(t_scene *cub)
 		x = 0;
 		while (cub->map[y][x])
 		{
-			// > %d = %c\n", x, cub->map[y][x]);
 			if (!valid_character(cub->map[y][x]))
 				return(0);
 			x++;
@@ -35,7 +34,6 @@ int	check_character(t_scene *cub)
 
 int	check_direction(t_scene *cub)
 {
-// N,S,E or W
 	int	x;
 	int	y;
 	int FLAG;
@@ -45,19 +43,39 @@ int	check_direction(t_scene *cub)
 	while (cub->map[y])
 	{
 		x = 0;
-		// printf("===> %d = %s\n", x, cub->map[y]);
 		while (cub->map[y][x])
 		{
 			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' || cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
-			// {
-			// 	printf("line = %d %s, x = %d, %c\n", y, cub->map[y], x, cub->map[y][x]);
 				FLAG ++;
-			// }
 			x++;
 		}
 		y++;
 	}
-	// printf("FLAG = %d\n", FLAG);
-	// if stat => check num of flags 
 	return (FLAG);
+}
+
+void	player_coordinates(t_scene *cub)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	cub->player_x = -1;
+	cub->player_y = -1;
+	while (cub->map[y])
+	{
+		x = 0;
+		while (cub->map[y][x])
+		{
+			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' || cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
+			{
+				cub->player_x = x;
+				cub->player_y = y;
+				break;
+			}
+			x++;
+		}
+		y++;
+	}
+	cub->player_position = cub->map[cub->player_y][cub->player_x];
 }
