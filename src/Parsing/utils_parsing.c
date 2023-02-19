@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:38:53 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/17 23:22:21 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/19 21:21:07 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,39 @@ int	ft_ptrlen(char **ptr)
 	int	i;
 
 	i = 0;
+	// if (!ptr)
+	// 	return (0);
 	while (ptr[i])
 		i++;
 	return (i);
+}
+
+int	ft_count(char *str, char c)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+bool	is_digit(char	*str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return(0);
+		i++;
+	}
+	return (1);
 }
