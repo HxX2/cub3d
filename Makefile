@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+         #
+#    By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 19:58:45 by zlafou            #+#    #+#              #
-#    Updated: 2023/02/17 23:26:11 by gkarib           ###   ########.fr        #
+#    Updated: 2023/02/19 20:36:34 by zlafou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,17 +14,21 @@ NAME			= cub3D
 
 PARSING			= utils_parsing.c valid_file.c convert_file.c component.c check_walls.c NO.c parse.c
 
-SRCS			= main.c $(PARSING)
+UTILS			= mem.c
+
+GAME			= events.c init.c primitives.c
+
+SRCS			= cub3d.c $(PARSING) $(GAME) $(UTILS)
 
 OBJS			= $(SRCS:.c=.o)
 
 CC				= cc
 
-CFLAGS			= -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
 
 MLX				= -lmlx -framework OpenGL -framework AppKit
 
-VPATH 			= src/Parsing
+VPATH 			= src/Parsing:src/game:src/utils
 
 HEADER			= "\033[0;35m   █▀▀ █░░█ █▀▀▄ █▀▀█ █▀▀▄ \n   █░░ █░░█ █▀▀▄ ░░▀▄ █░░█ \n   ▀▀▀ ░▀▀▀ ▀▀▀░ █▄▄█ ▀▀▀░\033[0;0m"
 
