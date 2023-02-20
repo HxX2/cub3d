@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:25:36 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/19 20:26:25 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/02/20 01:30:57 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,21 +79,23 @@ int	in_collision(t_game *game, double dx, double dy)
 	int p1;
 	int p2;
 
-	p0 = game->map[(int)((game->player.y + dy) / T_SIZE)][(int)((game->player.x + dx) / T_SIZE)] != '1';
-	p1 = game->map[(int)((game->player.y + dy) / T_SIZE)][(int)(game->player.x / T_SIZE)] != '1';
-	p2 = game->map[(int)((game->player.y) / T_SIZE)][(int)((game->player.x + dx) / T_SIZE)] != '1';
+	p0 = game->scene->map[(int)((game->player.y + dy) / T_SIZE)][(int)((game->player.x + dx) / T_SIZE)] != '1';
+	p1 = game->scene->map[(int)((game->player.y + dy) / T_SIZE)][(int)(game->player.x / T_SIZE)] != '1';
+	p2 = game->scene->map[(int)((game->player.y) / T_SIZE)][(int)((game->player.x + dx) / T_SIZE)] != '1';
 
 	return (p0 && p1 && p2);
 }
 
 void render_map(t_game *game)
 {
-	for (int i = 0; i < game->maph; i++)
+	for (int i = 0; i < game->scene->h_map; i++)
 	{
-		for (int j = 0; j < game->mapw; j++)
+		for (int j = 0; j < game->scene->w_map; j++)
 		{
-			if (game->map[i][j] == '1')
+			if (game->scene->map[i][j] == '1')
 				put_sldrect(game, j * T_SIZE, i * T_SIZE, j * T_SIZE, i * T_SIZE, 0x1794C2);
+			else if (game->scene->map[i][j] == ' ')
+				put_sldrect(game, j * T_SIZE, i * T_SIZE, j * T_SIZE, i * T_SIZE, 0x000000);
 			else
 				put_sldrect(game, j * T_SIZE, i * T_SIZE, j * T_SIZE, i * T_SIZE, 0xFFFFFF);
 		}
@@ -114,7 +116,8 @@ int	render_frame(t_game *game)
 	printf("direction = %d rot_ang = %f player_x = %f player_y = %f\n", game->player.walk_dir, game->player.rot_ang, game->player.x, game->player.y);
 	render_map(game);
 	put_sldcir(game, game->player.x, game->player.y , 8, 0xFF4040);
-	put_line(game, game->player.x, game->player.y, game->player.x + cos(game->player.rot_ang) * 40 , game->player.y + sin(game->player.rot_ang) * 40, 0xFF4040);
+	put_line(game, game->player.x, game->player.y, game->player.rot_ang, 40, 0xFF4040);
+	// put_line(game, game->player.x, game->player.y, game->player.x + cos(game->player.rot_ang) * 40 , game->player.y + sin(game->player.rot_ang) * 40, 0xFF4040);
 	mlx_put_image_to_window(game->mlx, game->win, game->frame.img, 0, 0);
 
 	return (0);

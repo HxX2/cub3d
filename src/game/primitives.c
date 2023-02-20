@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:27:43 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/19 20:15:13 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/02/20 00:48:00 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,28 @@ void	put_sldcir(t_game *game, int x, int y, int radius, int color)
 void	put_line(t_game *game, int x, int y, double angle,int size, int color)
 {
 	int i;
-	int lx;
-	int ly;
+	double dx;
+	double dy;
 
-	i = 1;
-	while (i <= size)
-	{
-		lx = x + cos(angle);
-		ly = y + sin(angle);
-		put_pxl(&game->frame, lx, ly, color);
-	}
+    i = 1;
+    while (i < size) {
+        dx = cos(angle) * i;
+        dy = sin(angle) * i;
+		put_pxl(&game->frame, dx+x, dy+y, color);
+        i++;
+    }
 }
+
+// void	put_line(t_game *game, int x, int y, double angle,int size, int color)
+// {
+//     double dx = cos(angle) * size;
+//     double dy = sin(angle) * size;
+//     int pxls = sqrt((dx * dx) + (dy * dy));
+
+//     while (pxls) {
+// 		put_pxl(&game->frame, x, y, color);
+//         x += dx;
+//         y += dy;
+//         pxls--;
+//     }
+// }
