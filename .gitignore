@@ -17,6 +17,7 @@ a.out
 *.a
 *.o
 main.c
+src/libft/libft.a
 
 # c++ debuger
 *.dSYM
