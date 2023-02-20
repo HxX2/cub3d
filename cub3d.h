@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 03:17:38 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/19 21:28:09 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/20 01:35:11 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,6 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	char		*mapfile;
-	char		**map;
-	int			mapw;
-	int			maph;
 	t_data		frame;
 	t_player	player;
 	t_scene		*scene;
