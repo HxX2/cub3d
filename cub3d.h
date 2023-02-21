@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 03:17:38 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/20 01:35:11 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/02/21 01:51:08 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,16 @@ typedef struct s_scene
 
 	int		player_x;
 	int		player_y;
-	char	player_position;
+	char	player_direction;
 	
 	int		no;
 	int		so;
 	int		we;
 	int		ea;
 
+	int		f_color;
+	int		c_color;
+	
 	int		h_map;
 	int		w_map;
 
@@ -97,7 +100,6 @@ int		ft_ptrlen(char **ptr);
 int		ft_count(char *str, char c);
 bool	is_digit(char	*str);
 
-
 bool	valid_extension(char *file_name, char *extension);
 int		valid_path(char *path);
 int		check_character(t_scene *cub);
@@ -110,6 +112,8 @@ void	player_coordinates(t_scene *cub);
 
 int		search_line(t_scene *cub, char *str);
 
+void	xpm_file_opened(char *str, char *path, int *fd);
+void	rgb_hexa(t_scene *cub, char *str, char *tmp, int i);
 int		ft_directions(t_scene *cub, char *str);
 int		ft_colors(t_scene *cub, char *str);
 
