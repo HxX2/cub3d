@@ -6,14 +6,51 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:46:55 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/19 21:25:21 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/21 15:40:31 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-//! seg fault (import scene: if scene is empty)
-//! seg fault (import map: getting the longest line)
+int	ft_ptrlen(char **ptr)
+{
+	int	i;
+
+	i = 0;
+	if (!ptr)
+		return (0);
+	while (ptr[i])
+		i++;
+	return (i);
+}
+
+void	check_new_line(char *map)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	while (map[i])
+	{
+		if (map[i] == '1')
+		{
+			i++;
+			if (map[i] == '\n')
+			{
+				while (map[i] == '\n')
+				{
+					i++;
+					flag++;
+				}
+			}
+			if (map[i] == '1' && flag > 1)
+				exit(printf("more than 1 new line found"));
+		}
+		flag = 0;
+		i++;
+	}
+}
 
 void	import_scene(int fd, t_scene *cub)
 {
@@ -36,13 +73,11 @@ void	import_scene(int fd, t_scene *cub)
 			return ;
 	}
 	free(buffer);
+	check_new_line(map);
 	cub->scene = ft_split(map, '\n');
-	
-	//* seg fault 
-	// if (!ft_ptrlen(cub->map))
-	// 	exit (0);
+	if (!ft_ptrlen(cub->scene))
+		exit (printf("Empty File!"));
 	free(map);
-
 }
 
 void	import_map(t_scene *cub)
@@ -61,17 +96,12 @@ void	import_map(t_scene *cub)
 	}
 	cub->map[i] = NULL;
 	cub->h_map = ft_ptrlen(cub->map);
-	
-// *seg fault
-	// printf("ptrlen == %d\n", cub->h_map);
-	// y = 0;
-	// while (y < cub->h_map)
-	// {
-		
-	// 	if ((ft_strlen(cub->map[y]) >= ft_strlen(cub->map[y + 1])) && cub->map[y] && cub->map[y + 1])
-	// 		cub->w_map = ft_strlen(cub->map[y]);
-	// 		// printf("worked");
-	// 	y++;
-	// 	printf("line %d= %s\n", y, cub->map[y]);
-	// }
+	cub->w_map = 0;
+	y = 0;
+	while (y < cub->h_map)
+	{
+		if (cub->w_map < (int)ft_strlen(cub->map[y]))
+			cub->w_map = (int)ft_strlen(cub->map[y]);
+		y++;
+	}
 }
