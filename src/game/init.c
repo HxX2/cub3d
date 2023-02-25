@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:47:14 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/24 03:00:51 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/25 05:25:52 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_game(t_game *game)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->scene->w_map * T_SIZE,
 			game->scene->h_map * T_SIZE, "CUB3D");
+	mlx_new_window(game->mlx, 1080,720,"hmida");
 	game->frame.img = mlx_new_image(game->mlx, game->scene->w_map * T_SIZE,
 			game->scene->h_map * T_SIZE);
 	game->frame.addr = mlx_get_data_addr(game->frame.img,
@@ -40,11 +41,11 @@ double get_dir(char p)
 }
 void	init_player(t_game *game)
 {
-	game->player.x = game->scene->player_x * T_SIZE;
-	game->player.y = game->scene->player_y * T_SIZE;
+	game->player.x = (game->scene->player_x * T_SIZE) + 32;
+	game->player.y = (game->scene->player_y * T_SIZE) + 32;
 	game->player.walk_dir = 0;
 	game->player.turn_dir = 0;
 	game->player.rot_ang = get_dir(game->scene->player_direction);
-	game->player.move_speed = 4.0;
+	game->player.move_speed = 5.0;
 	game->player.rot_speed = 4 * (M_PI / 180);
 }

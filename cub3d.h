@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 03:17:38 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/25 04:25:13 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/25 05:16:27 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,8 @@ void	put_pxl(t_data *data, int x, int y, int color);
 void	put_sldrect(t_game *game, int x0, int y0, int x1, int y1, int color);
 void	put_sldcir(t_game *game, int x, int y, int radius, int color);
 void	put_line(t_game *game, int x, int y, double angle, int size, int color);
+int		in_collision(t_game *game, double dx, double dy);
+void	shoot_ray(t_game *game, int x, int y, double angle, int color);
+void	shoot_rays(t_game *game, int x, int y, double angle, int color);
 
 #endif
