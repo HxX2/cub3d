@@ -1,63 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 16:01:15 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/21 15:38:48 by gkarib           ###   ########.fr       */
+/*   Created: 2023/02/22 00:59:20 by gkarib            #+#    #+#             */
+/*   Updated: 2023/02/25 04:14:32 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int	valid_file_xpm(t_scene *cub, char *str, char *path)
+void	rgb_hexa(t_scene *cub, char *str, char *tmp, int i)
 {
-	int	x;
-
-	x = 0;
-	if (!valid_extension(path + x, ".xpm"))
+	if (ft_strcmp(str, "F"))
 	{
-		free(path);
-		return (printf("Extension of -%s- file Not Valid!\n", str));
+		if (i == 0)
+		{
+			cub->f_color = 0;
+			cub->f_color += (ft_atoi(tmp) & (0xFF)) << 16;
+		}
+		if (i == 1)
+			cub->f_color += (ft_atoi(tmp) & (0xFF)) << 8;
+		if (i == 2)
+			cub->f_color += (ft_atoi(tmp) & (0xFF));
 	}
-	if (!ft_strcmp(str, "NO"))
-		xpm_file_opened(str, path, &cub->no);
-	else if (!ft_strcmp(str, "SO"))
-		xpm_file_opened(str, path, &cub->so);
-	else if (!ft_strcmp(str, "WE"))
-		xpm_file_opened(str, path, &cub->we);
-	else if (!ft_strcmp(str, "EA"))
-		xpm_file_opened(str, path, &cub->ea);
-	return (0);
-}
-
-int	ft_directions(t_scene *cub, char *str)
-{
-	char	*line;
-	char	*path;
-	int		y;
-
-	y = search_line(cub, str);
-	if (y == -1)
-		return (printf("Line -%s- not found", str));
-	line = ft_strtrim(cub->scene[y], " ");
-	if (ft_strncmp(line, str, 2))
+	if (ft_strcmp(str, "C"))
 	{
-		free (line);
-		return (printf("There isn't only white spaces before -%s-", str));
+		if (i == 0)
+		{
+			cub->c_color = 0;
+			cub->c_color += (ft_atoi(tmp) & (0xFF)) << 16;
+		}
+		if (i == 1)
+			cub->c_color += (ft_atoi(tmp) & (0xFF)) << 8;
+		if (i == 2)
+			cub->c_color += (ft_atoi(tmp) & (0xFF));
 	}
-	path = ft_substr(line, 2, ft_strlen(line) - 2);
-	free(line);
-	if (white_space(*path))
-	{
-		free (path);
-		return (printf("No space after \"%s\"!\n", str));
-	}
-	if (valid_file_xpm(cub, str, path))
-		return (1);
-	return (0);
 }
 
 void	clamp_digit(char **rgb_str, char *tmp, int i)
@@ -66,13 +46,13 @@ void	clamp_digit(char **rgb_str, char *tmp, int i)
 	{
 		ft_rwipe(rgb_str, 2);
 		free(tmp);
-		exit(printf("An rgb_color contains a None digit char!"));
+		exit(printf("Error: An rgb_color contains a None digit char!\n"));
 	}
 	if (ft_atoi(rgb_str[i]) < 0 || ft_atoi(rgb_str[i]) > 255)
 	{
 		ft_rwipe(rgb_str, 2);
 		free(tmp);
-		exit(printf("out of range"));
+		exit(printf("Error: Out of range\n"));
 	}
 }
 
@@ -84,7 +64,7 @@ int	valid_color(t_scene *cub, char *str, char *color_line)
 
 	i = 0;
 	if (ft_count(color_line, ',') != 2)
-		return (printf("Wrong number of commas!"));
+		exit(printf("Error: Wrong number of commas!\n"));
 	rgb_str = ft_split(color_line, ',');
 	free(color_line);
 	while (rgb_str[i])
@@ -107,19 +87,19 @@ int	ft_colors(t_scene *cub, char *str)
 
 	y = search_line(cub, str);
 	if (y == -1)
-		return (printf("Line -%s- not found", str));
+		exit(printf("Error: Line -%s- not found\n", str));
 	line = ft_strtrim(cub->scene[y], " ");
 	if (ft_strncmp(line, str, 1))
 	{
 		free (line);
-		return (printf("There isn't only white spaces before -%s-", str));
+		exit(printf("Error: There isn't only white spaces before -%s-\n", str));
 	}
 	color_line = ft_substr(line, 1, ft_strlen(line) - 1);
 	free(line);
 	if (white_space(*color_line))
 	{
 		free (color_line);
-		return (printf("No space after \"%s\"!\n", str));
+		exit(printf("Error: No space after \"%s\"!\n", str));
 	}
 	valid_color(cub, str, color_line);
 	return (0);
