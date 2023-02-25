@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:37:05 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/25 04:23:33 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/25 05:18:43 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	main(int ac, char **av)
 	}
 	else
 		return (printf("Wrong number of argument!\n"));
-	// init_game(&game);
-	// init_player(&game);
-	// mlx_hook(game.win, EVENT_KEY_PRESS, 0, key_press, &game);
-	// mlx_hook(game.win, EVENT_KEY_RELEASE, 0, key_release, &game);
-	// mlx_loop_hook(game.mlx, render_frame, &game);
-	// mlx_loop(game.mlx);
+	init_game(&game);
+	init_player(&game);
+	mlx_hook(game.win, EVENT_KEY_PRESS, 0, key_press, &game);
+	mlx_hook(game.win, EVENT_KEY_RELEASE, 0, key_release, &game);
+	mlx_loop_hook(game.mlx, render_frame, &game);
+	mlx_loop(game.mlx);
 	// // ft_rwipe(game.scene->scene, 2);
 
 	return (0);
