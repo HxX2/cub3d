@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:25:36 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/20 01:30:57 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/02/24 03:04:59 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	render_frame(t_game *game)
 		game->player.x += dx;
 		game->player.y += dy;
 	}
-	printf("direction = %d rot_ang = %f player_x = %f player_y = %f\n", game->player.walk_dir, game->player.rot_ang, game->player.x, game->player.y);
+	// printf("direction = %d rot_ang = %f player_x = %f player_y = %f\n", game->player.walk_dir, game->player.rot_ang, game->player.x, game->player.y);
 	render_map(game);
 	put_sldcir(game, game->player.x, game->player.y , 8, 0xFF4040);
 	put_line(game, game->player.x, game->player.y, game->player.rot_ang, 40, 0xFF4040);

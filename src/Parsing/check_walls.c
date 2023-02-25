@@ -6,11 +6,52 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 23:24:46 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/21 00:47:08 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/25 04:14:46 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+int	index_start_map(char *str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] != '\n')
+		{
+			j = i;
+			while (valid_character(str[i]))
+			{
+				i++;
+				if (str[i] == '\n')
+					return (j);
+			}
+			while (str[i] != '\n')
+				i++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	check_new_line(char *map)
+{
+	int	i;
+
+	i = index_start_map(map);
+	if (!i)
+		exit (printf("Error: Valid Map line not found\n"));
+	while (map[i])
+	{
+		if (map[i] == '\n' && map[i + 1] == '\n')
+			exit(printf("Error: More than 1 new line found\n"));
+		i++;
+	}
+}
 
 int	white_space_surrounded_by_walls(t_scene *cub)
 {
@@ -62,7 +103,7 @@ int	ptrlen_wall(t_scene *cub)
 	return (1);
 }
 
-int	surrounded_by_walls(t_scene *cub)
+int	map_surrounded_by_walls(t_scene *cub)
 {
 	int	x;
 	int	y;

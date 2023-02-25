@@ -6,13 +6,13 @@
 #    By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 19:58:45 by zlafou            #+#    #+#              #
-#    Updated: 2023/02/19 21:27:29 by gkarib           ###   ########.fr        #
+#    Updated: 2023/02/25 04:23:24 by gkarib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= cub3D
 
-PARSING			= utils_parsing.c valid_file.c convert_file.c component.c check_walls.c textures.c parse.c
+PARSING			= utils_parsing.c valid_file.c convert_file.c component.c check_walls.c direction.c colors.c parse.c
 
 UTILS			= mem.c
 

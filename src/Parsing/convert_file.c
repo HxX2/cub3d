@@ -6,50 +6,18 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:46:55 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/21 15:40:31 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/25 04:31:14 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int	ft_ptrlen(char **ptr)
+void	split_scene(t_scene *cub, char *map)
 {
-	int	i;
-
-	i = 0;
-	if (!ptr)
-		return (0);
-	while (ptr[i])
-		i++;
-	return (i);
-}
-
-void	check_new_line(char *map)
-{
-	int	i;
-	int	flag;
-
-	i = 0;
-	flag = 0;
-	while (map[i])
-	{
-		if (map[i] == '1')
-		{
-			i++;
-			if (map[i] == '\n')
-			{
-				while (map[i] == '\n')
-				{
-					i++;
-					flag++;
-				}
-			}
-			if (map[i] == '1' && flag > 1)
-				exit(printf("more than 1 new line found"));
-		}
-		flag = 0;
-		i++;
-	}
+	cub->scene = ft_split(map, '\n');
+	free(map);
+	if (!ft_ptrlen(cub->scene))
+		exit (printf("Empty File!"));
 }
 
 void	import_scene(int fd, t_scene *cub)
@@ -60,11 +28,15 @@ void	import_scene(int fd, t_scene *cub)
 	char	*map;
 
 	buffer = malloc(sizeof(char) * 1025);
+	if (!buffer)
+		exit(printf("Error: allocattion failed!\n"));
 	eof = 1;
 	map = ft_strdup("");
 	while (eof)
 	{
 		eof = read(fd, buffer, 1024);
+		if (eof == -1)
+			exit (printf("Error related with reading the map\n"));
 		buffer[eof] = 0;
 		tmp = map;
 		map = ft_strjoin(tmp, buffer);
@@ -74,10 +46,41 @@ void	import_scene(int fd, t_scene *cub)
 	}
 	free(buffer);
 	check_new_line(map);
-	cub->scene = ft_split(map, '\n');
-	if (!ft_ptrlen(cub->scene))
-		exit (printf("Empty File!"));
-	free(map);
+	split_scene(cub, map);
+}
+
+char	*clean_line(char *str)
+{
+	int	len;
+	int	i;
+
+	i = 0;
+	len = ft_strlen(str);
+	while (!white_space(str[len]))
+	{
+		len--;
+		if (len == 0)
+			break ;
+	}
+	return (ft_substr(str, i, len + 1));
+}
+
+void	fill_line(t_scene *cub)
+{
+	char	*tmp;
+	int		y;
+
+	y = 0;
+	while (cub->map[y])
+	{
+		while ((int)ft_strlen(cub->map[y]) < cub->w_map)
+		{
+			tmp = cub->map[y];
+			cub->map[y] = ft_strjoin(tmp, " ");
+			free (tmp);
+		}
+		y++;
+	}
 }
 
 void	import_map(t_scene *cub)
@@ -88,9 +91,11 @@ void	import_map(t_scene *cub)
 	y = 6;
 	i = 0;
 	cub->map = malloc(sizeof(char *) * ft_ptrlen(cub->scene) - y + 1);
+	if (!cub->map)
+		exit(printf("Error: allocattion failed!\n"));
 	while (y < ft_ptrlen(cub->scene))
 	{
-		cub->map[i] = cub->scene[y];
+		cub->map[i] = clean_line(cub->scene[y]);
 		y++;
 		i++;
 	}
@@ -104,4 +109,5 @@ void	import_map(t_scene *cub)
 			cub->w_map = (int)ft_strlen(cub->map[y]);
 		y++;
 	}
+	fill_line(cub);
 }

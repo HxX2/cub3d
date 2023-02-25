@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:45:51 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/21 01:49:05 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/22 01:04:12 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,30 @@ int	valid_path(char *path)
 	return (fd);
 }
 
-int	search_line(t_scene *cub, char *str)
+bool	valid_character(char c)
 {
-	int		y;
+	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'E'
+		&& c != 'W' && white_space(c))
+		return (0);
+	return (1);
+}
+
+int	check_character(t_scene *cub)
+{
+	int	x;
+	int	y;
 
 	y = 0;
-	while (y < 6)
+	while (cub->map[y])
 	{
-		if (ft_strstr(cub->scene[y], str))
-			return (y);
+		x = 0;
+		while (cub->map[y][x])
+		{
+			if (!valid_character(cub->map[y][x]))
+				return (0);
+			x++;
+		}
 		y++;
 	}
-	return (-1);
+	return (1);
 }
