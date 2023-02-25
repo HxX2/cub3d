@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:25:36 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/24 03:04:59 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/25 05:18:19 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+#include <time.h>
 
 int	key_press(int keycode, void *param)
 {
@@ -29,7 +30,6 @@ int	key_press(int keycode, void *param)
 		game->player.turn_dir = -1;
 	else if (keycode == KEY_RIGHT)
 		game->player.turn_dir = 1;
-	
 	return (0);
 }
 
@@ -107,17 +107,24 @@ int	render_frame(t_game *game)
 	double dx;
 	double dy;
 
+    clock_t current_time = clock();
+    static clock_t last_time = 0;
+    double time_elapsed = (double)(current_time - last_time) / CLOCKS_PER_SEC;
+    last_time = current_time;
+    double fps = 1.0 / time_elapsed;
+
 	update_direction(game, &dx, &dy);
 	if (in_collision(game, dx, dy))
 	{
 		game->player.x += dx;
 		game->player.y += dy;
 	}
-	// printf("direction = %d rot_ang = %f player_x = %f player_y = %f\n", game->player.walk_dir, game->player.rot_ang, game->player.x, game->player.y);
+	printf("\rFPS = %d | direction = %d rot_ang = %f player_x = %f player_y = %f\n", (int)floor(fps), game->player.walk_dir, game->player.rot_ang, game->player.x, game->player.y);
+	// printf("direction = %d rot_a ng = %f player_x = %f player_y = %f\n", game->player.walk_dir, game->player.rot_ang, game->player.x, game->player.y);
 	render_map(game);
+	shoot_rays(game, game->player.x, game->player.y, game->player.rot_ang, 0x86C6D5);
 	put_sldcir(game, game->player.x, game->player.y , 8, 0xFF4040);
 	put_line(game, game->player.x, game->player.y, game->player.rot_ang, 40, 0xFF4040);
-	// put_line(game, game->player.x, game->player.y, game->player.x + cos(game->player.rot_ang) * 40 , game->player.y + sin(game->player.rot_ang) * 40, 0xFF4040);
 	mlx_put_image_to_window(game->mlx, game->win, game->frame.img, 0, 0);
 
 	return (0);

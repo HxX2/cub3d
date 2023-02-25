@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+         #
+#    By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 19:58:45 by zlafou            #+#    #+#              #
-#    Updated: 2023/02/25 04:23:24 by gkarib           ###   ########.fr        #
+#    Updated: 2023/02/25 05:17:41 by zlafou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ PARSING			= utils_parsing.c valid_file.c convert_file.c component.c check_walls.
 
 UTILS			= mem.c
 
-GAME			= events.c init.c primitives.c
+GAME			= events.c init.c primitives.c raycasting.c
 
 SRCS			= cub3d.c $(PARSING) $(GAME) $(UTILS)
 
