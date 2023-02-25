@@ -6,31 +6,11 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:11:22 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/21 00:45:07 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/02/22 01:04:16 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-
-int	check_character(t_scene *cub)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (cub->map[y])
-	{
-		x = 0;
-		while (cub->map[y][x])
-		{
-			if (!valid_character(cub->map[y][x]))
-				return (0);
-			x++;
-		}
-		y++;
-	}
-	return (1);
-}
 
 int	check_direction(t_scene *cub)
 {
