@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:27:43 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/21 14:18:16 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/02 00:49:08 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	put_sldrect(t_game *game, int x0, int y0, int x1, int y1, int color)
 	int	y;
 
 	y = y0;
-	while (y < y1 + T_SIZE)
+	while (y < y1)
 	{
 		x = x0;
-		while (x < x1 + T_SIZE)
+		while (x < x1)
 		{
 			put_pxl(&game->frame, x, y, color);
 			x++;
