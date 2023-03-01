@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 03:17:38 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/25 05:16:27 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/01 07:51:02 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
+# include <limits.h>
 # include <math.h>
 # include <stdbool.h>
 # include "mlx.h"
@@ -33,12 +34,18 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_R 15
+
 # define T_SIZE 64
+# define FOV 60 * (M_PI / 180)
+# define WIN_W 1920
+# define WIN_H 1080
+# define COL_THICC 1
+# define N_RAYS WIN_W / COL_THICC
 
 typedef struct s_vec
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 }			t_vec;
 
 typedef struct s_player
@@ -82,11 +89,24 @@ typedef struct s_scene
 
 }	t_scene;
 
+typedef struct s_ray
+{
+	int		is_up;
+	int		is_down;
+	int		is_left;
+	int		is_right;
+	double	w_hit_x;
+	double	w_hit_y;
+	double	dist;
+	double	angle;
+}		t_ray;
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	char		*mapfile;
+	t_ray		*rays;
 	t_data		frame;
 	t_player	player;
 	t_scene		*scene;
@@ -148,6 +168,7 @@ void	put_sldcir(t_game *game, int x, int y, int radius, int color);
 void	put_line(t_game *game, int x, int y, double angle, int size, int color);
 int		in_collision(t_game *game, double dx, double dy);
 void	shoot_ray(t_game *game, int x, int y, double angle, int color);
-void	shoot_rays(t_game *game, int x, int y, double angle, int color);
+void	shoot_rays(t_game *game, double angle, int color);
+int		in_collision(t_game *game, double dx, double dy);
 
 #endif

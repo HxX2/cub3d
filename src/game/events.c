@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:25:36 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/25 05:18:19 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/02 00:48:43 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,12 @@ int	render_frame(t_game *game)
 		game->player.y += dy;
 	}
 	printf("\rFPS = %d | direction = %d rot_ang = %f player_x = %f player_y = %f\n", (int)floor(fps), game->player.walk_dir, game->player.rot_ang, game->player.x, game->player.y);
-	// printf("direction = %d rot_a ng = %f player_x = %f player_y = %f\n", game->player.walk_dir, game->player.rot_ang, game->player.x, game->player.y);
-	render_map(game);
-	shoot_rays(game, game->player.x, game->player.y, game->player.rot_ang, 0x86C6D5);
-	put_sldcir(game, game->player.x, game->player.y , 8, 0xFF4040);
-	put_line(game, game->player.x, game->player.y, game->player.rot_ang, 40, 0xFF4040);
+	// render_map(game);
+	// put_sldcir(game, game->player.x, game->player.y , 8, 0xFF4040);
+	// put_line(game, game->player.x, game->player.y, game->player.rot_ang, 40, 0xFF4040);
+	shoot_rays(game, game->player.rot_ang, 0x86C6D5);
+	put_sldrect(game,0,0,WIN_W,WIN_H/2,game->scene->c_color);
+	put_sldrect(game,0,WIN_H/2,WIN_W,WIN_H,game->scene->f_color);
 	mlx_put_image_to_window(game->mlx, game->win, game->frame.img, 0, 0);
 
 	return (0);
