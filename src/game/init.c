@@ -6,7 +6,7 @@
 /*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:47:14 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/25 05:25:52 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/02 00:46:34 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->scene->w_map * T_SIZE,
-			game->scene->h_map * T_SIZE, "CUB3D");
-	mlx_new_window(game->mlx, 1080,720,"hmida");
-	game->frame.img = mlx_new_image(game->mlx, game->scene->w_map * T_SIZE,
-			game->scene->h_map * T_SIZE);
+	game->win = mlx_new_window(game->mlx, WIN_W, WIN_H, "CUB3D");
+	// mlx_new_window(game->mlx, 1080,720,"hmida");
+	game->frame.img = mlx_new_image(game->mlx, WIN_W, WIN_H);
 	game->frame.addr = mlx_get_data_addr(game->frame.img,
 			&game->frame.bits_per_pixel,
 			&game->frame.line_length,
 			&game->frame.endian);
+	game->rays = ft_xalloc(N_RAYS * sizeof(t_ray));
 }
 
 double get_dir(char p)
