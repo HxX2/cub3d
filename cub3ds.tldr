@@ -5020,15 +5020,13 @@
     "pageStates": {
       "page": {
         "id": "page",
-        "selectedIds": [
-          "5c34b5d3-9152-462c-0be6-281d652b3e8d"
-        ],
+        "selectedIds": [],
         "camera": {
           "point": [
-            -930.02,
-            -1944.1
+            -82.06,
+            -334.64
           ],
-          "zoom": 0.5
+          "zoom": 0.25
         }
       }
     },

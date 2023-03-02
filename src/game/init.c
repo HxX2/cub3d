@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:47:14 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/02 00:46:34 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/02 02:19:30 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	init_player(t_game *game)
 	game->player.walk_dir = 0;
 	game->player.turn_dir = 0;
 	game->player.rot_ang = get_dir(game->scene->player_direction);
-	game->player.move_speed = 5.0;
+	game->player.move_speed = 10.0;
 	game->player.rot_speed = 4 * (M_PI / 180);
 }

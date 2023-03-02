@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 03:17:38 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/01 07:51:02 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/02 03:08:40 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ typedef struct s_ray
 	double	w_hit_y;
 	double	dist;
 	double	angle;
+	double	distance_pro; // distance to the projection plane
+	double	projected_wall_height;
 }		t_ray;
 
 typedef struct s_game
@@ -110,7 +112,7 @@ typedef struct s_game
 	t_data		frame;
 	t_player	player;
 	t_scene		*scene;
-}		t_game;
+}		t_game; 
 
 // ======================PARSING:======================
 
@@ -170,5 +172,7 @@ int		in_collision(t_game *game, double dx, double dy);
 void	shoot_ray(t_game *game, int x, int y, double angle, int color);
 void	shoot_rays(t_game *game, double angle, int color);
 int		in_collision(t_game *game, double dx, double dy);
+
+void	project_wall(t_game *game);
 
 #endif
