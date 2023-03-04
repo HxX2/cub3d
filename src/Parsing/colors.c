@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 00:59:20 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/25 04:14:32 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/02 20:05:19 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	rgb_hexa(t_scene *cub, char *str, char *tmp, int i)
 {
-	if (ft_strcmp(str, "F"))
+	if (!ft_strcmp(str, "F"))
 	{
 		if (i == 0)
 		{
@@ -26,7 +26,7 @@ void	rgb_hexa(t_scene *cub, char *str, char *tmp, int i)
 		if (i == 2)
 			cub->f_color += (ft_atoi(tmp) & (0xFF));
 	}
-	if (ft_strcmp(str, "C"))
+	if (!ft_strcmp(str, "C"))
 	{
 		if (i == 0)
 		{
@@ -66,6 +66,8 @@ int	valid_color(t_scene *cub, char *str, char *color_line)
 	if (ft_count(color_line, ',') != 2)
 		exit(printf("Error: Wrong number of commas!\n"));
 	rgb_str = ft_split(color_line, ',');
+	if (ft_ptrlen(rgb_str) != 3)
+		exit (printf("Error: Wrong number of digits!\n"));
 	free(color_line);
 	while (rgb_str[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:25:36 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/02 02:14:58 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/02 03:40:01 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int	render_frame(t_game *game)
 	// put_sldcir(game, game->player.x, game->player.y , 8, 0xFF4040);
 	// put_line(game, game->player.x, game->player.y, game->player.rot_ang, 40, 0xFF4040);
 	shoot_rays(game, game->player.rot_ang, 0x86C6D5);
-	put_sldrect(game,0,0,WIN_W,WIN_H/2,game->scene->c_color);
+	put_sldrect(game, 0, 0, WIN_W, WIN_H/2, game->scene->c_color);
 	put_sldrect(game,0,WIN_H/2,WIN_W,WIN_H,game->scene->f_color);
 	project_wall(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->frame.img, 0, 0);

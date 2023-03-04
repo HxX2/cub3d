@@ -6,23 +6,27 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:01:15 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/25 04:15:36 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/03 03:37:56 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	xpm_file_opened(char *str, char *path, int *fd)
+void	xpm_file_opened(char *str, char *path, char **dir)
 {
 	int	x;
 
 	x = 0;
 	while (!white_space(path[x]))
 		x++;
-	*fd = valid_path(path + x);
-	free(path);
-	if (!*fd)
+	// *fd = valid_path(path + x);
+	if (!valid_path(path + x))
+	{
+		free(path);
 		exit(printf("Error: File -%s- couldn't open!\n", str));
+	}
+	*dir = ft_substr(path, x, ft_strlen(path));
+	free(path);
 }
 
 int	valid_file_xpm(t_scene *cub, char *str, char *path)
@@ -36,13 +40,13 @@ int	valid_file_xpm(t_scene *cub, char *str, char *path)
 		exit(printf("Error: Extension of -%s- file Not Valid!\n", str));
 	}
 	if (!ft_strcmp(str, "NO"))
-		xpm_file_opened(str, path, &cub->no);
+		xpm_file_opened(str, path, &cub->no_path);
 	else if (!ft_strcmp(str, "SO"))
-		xpm_file_opened(str, path, &cub->so);
+		xpm_file_opened(str, path, &cub->so_path);
 	else if (!ft_strcmp(str, "WE"))
-		xpm_file_opened(str, path, &cub->we);
+		xpm_file_opened(str, path, &cub->we_path);
 	else if (!ft_strcmp(str, "EA"))
-		xpm_file_opened(str, path, &cub->ea);
+		xpm_file_opened(str, path, &cub->ea_path);
 	return (0);
 }
 

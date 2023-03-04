@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:37:05 by zlafou            #+#    #+#             */
-/*   Updated: 2023/02/26 03:15:13 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/03 03:37:23 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ int	main(int ac, char **av)
 	{
 		if (parse_map(av[1], game.scene))
 			return (1);
+		// printf("valid path = ****%s****\n", game.scene->no_path);
+		// printf("valid path = ****%s****\n", game.scene->so_path);
+		// printf("valid path = ****%s****\n", game.scene->ea_path);
+		// printf("valid path = ****%s****\n", game.scene->we_path);
 		// system("leaks cub3D");
 	}
 	else
