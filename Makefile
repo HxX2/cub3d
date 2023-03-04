@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+         #
+#    By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 19:58:45 by zlafou            #+#    #+#              #
-#    Updated: 2023/02/25 05:17:41 by zlafou           ###   ########.fr        #
+#    Updated: 2023/03/03 03:36:11 by gkarib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ PARSING			= utils_parsing.c valid_file.c convert_file.c component.c check_walls.
 
 UTILS			= mem.c
 
-GAME			= events.c init.c primitives.c raycasting.c
+GAME			= events.c init.c primitives.c raycasting.c 3D_implementetion.c
 
 SRCS			= cub3d.c $(PARSING) $(GAME) $(UTILS)
 
@@ -24,7 +24,7 @@ OBJS			= $(SRCS:.c=.o)
 
 CC				= cc
 
-CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror #-g -fsanitize=address
 
 MLX				= -lmlx -framework OpenGL -framework AppKit
 

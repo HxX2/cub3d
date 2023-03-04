@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 03:17:38 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/01 07:51:02 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/04 02:48:08 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ typedef struct s_scene
 	int		player_y;
 	char	player_direction;
 
-	int		no;
-	int		so;
-	int		we;
-	int		ea;
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
 
 	int		f_color;
 	int		c_color;
@@ -95,10 +95,14 @@ typedef struct s_ray
 	int		is_down;
 	int		is_left;
 	int		is_right;
+	int		is_v_hit;
+	int		is_h_hit;
 	double	w_hit_x;
 	double	w_hit_y;
 	double	dist;
 	double	angle;
+	double	distance_pro; // distance to the projection plane
+	double	projected_wall_height;
 }		t_ray;
 
 typedef struct s_game
@@ -108,9 +112,15 @@ typedef struct s_game
 	char		*mapfile;
 	t_ray		*rays;
 	t_data		frame;
+	
+	t_data		north;
+	t_data		south;
+	t_data		west;
+	t_data		east;
+	
 	t_player	player;
 	t_scene		*scene;
-}		t_game;
+}		t_game; 
 
 // ======================PARSING:======================
 
@@ -138,7 +148,7 @@ char	*clean_line(char *str);
 void	fill_line(t_scene *cub);
 void	import_map(t_scene *cub);
 
-void	xpm_file_opened(char *str, char *path, int *fd);
+void	xpm_file_opened(char *str, char *path, char **dir);
 int		valid_file_xpm(t_scene *cub, char *str, char *path);
 int		search_line(t_scene *cub, char *str);
 int		ft_directions(t_scene *cub, char *str);
@@ -170,5 +180,7 @@ int		in_collision(t_game *game, double dx, double dy);
 void	shoot_ray(t_game *game, int x, int y, double angle, int color);
 void	shoot_rays(t_game *game, double angle, int color);
 int		in_collision(t_game *game, double dx, double dy);
+
+void	project_wall(t_game *game);
 
 #endif

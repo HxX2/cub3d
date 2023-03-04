@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:38:53 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/22 01:48:38 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/02 20:00:44 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ bool	is_digit(char	*str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
