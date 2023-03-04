@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:17:23 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/02 00:44:51 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/04 03:10:16 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,20 +168,19 @@ void cast_ray(t_game *game, t_ray *ray, int color)
 	t_vec 	wh_h;
 	double 	h_dist;
 	double 	v_dist;
-	int		is_v_hit;
-	int		is_h_hit;
+	// int		is_v_hit;
+	// int		is_h_hit;
 
-	is_h_hit = 0;
-	is_v_hit = 0;
-	wh_h = h_ray(game, ray, &is_h_hit);
-	wh_v = v_ray(game, ray, &is_v_hit);
+	game->rays->is_h_hit = 0;
+	game->rays->is_v_hit = 0;
+	wh_h = h_ray(game, ray, &game->rays->is_h_hit);
+	wh_v = v_ray(game, ray, &game->rays->is_v_hit);
 
-
-	if (is_h_hit)
+	if (game->rays->is_h_hit)
 		h_dist = get_dist(game->player.x, game->player.y, wh_h.x, wh_h.y);
 	else
 		h_dist = __DBL_MAX__;
-	if (is_v_hit)
+	if (game->rays->is_v_hit)
 		v_dist = get_dist(game->player.x, game->player.y, wh_v.x, wh_v.y);
 	else
 		v_dist = __DBL_MAX__;

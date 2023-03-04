@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:25:36 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/02 00:48:43 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/02 03:40:01 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	key_press(int keycode, void *param)
 		game->player.turn_dir = -1;
 	else if (keycode == KEY_RIGHT)
 		game->player.turn_dir = 1;
+	else if (keycode == KEY_ESC)
+		exit(1);
 	return (0);
 }
 
@@ -112,21 +114,21 @@ int	render_frame(t_game *game)
     double time_elapsed = (double)(current_time - last_time) / CLOCKS_PER_SEC;
     last_time = current_time;
     double fps = 1.0 / time_elapsed;
-
+	(void)fps;
 	update_direction(game, &dx, &dy);
 	if (in_collision(game, dx, dy))
 	{
 		game->player.x += dx;
 		game->player.y += dy;
 	}
-	printf("\rFPS = %d | direction = %d rot_ang = %f player_x = %f player_y = %f\n", (int)floor(fps), game->player.walk_dir, game->player.rot_ang, game->player.x, game->player.y);
+	// printf("\rFPS = %d | dir ection = %d rot_ang = %f player_x = %f player_y = %f\n", (int)floor(fps), game->player.walk_dir, game->player.rot_ang, game->player.x, game->player.y);
 	// render_map(game);
 	// put_sldcir(game, game->player.x, game->player.y , 8, 0xFF4040);
 	// put_line(game, game->player.x, game->player.y, game->player.rot_ang, 40, 0xFF4040);
 	shoot_rays(game, game->player.rot_ang, 0x86C6D5);
-	put_sldrect(game,0,0,WIN_W,WIN_H/2,game->scene->c_color);
+	put_sldrect(game, 0, 0, WIN_W, WIN_H/2, game->scene->c_color);
 	put_sldrect(game,0,WIN_H/2,WIN_W,WIN_H,game->scene->f_color);
+	project_wall(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->frame.img, 0, 0);
-
 	return (0);
 }

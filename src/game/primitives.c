@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   primitives.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:27:43 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/02 00:49:08 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/02 02:01:06 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	put_pxl(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
+	if (x < 0 || x > (WIN_W) || y < 0 || y > (WIN_H))
+		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
