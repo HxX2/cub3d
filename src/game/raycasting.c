@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 14:17:23 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/04 03:10:16 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/04 23:06:14 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ t_vec h_ray(t_game *game, t_ray *ray, int *is_h_hit)
 	next_stp.x = intrcp.x;
 	next_stp.y = intrcp.y;
 
-	if (ray->is_up)
-		next_stp.y--;
+	// if (ray->is_up)
+	// 	next_stp.y--;
 
 	while ((next_stp.x >= 0 && next_stp.x <= (game->scene->w_map * T_SIZE)) && (next_stp.y >= 0 && next_stp.y <= (game->scene->h_map * T_SIZE)))
 	{
-		if (ray_collision(game, next_stp.x, next_stp.y))
+		if (ray_collision(game, next_stp.x, next_stp.y - (ray->is_up)))
 		{
 			*is_h_hit = 1;
 			wall_hit.x = next_stp.x;
@@ -144,12 +144,12 @@ t_vec v_ray(t_game *game, t_ray *ray, int *is_v_hit)
 	next_stp.x = intrcp.x;
 	next_stp.y = intrcp.y;
 
-	if (ray->is_left)
-		next_stp.x--;
+	// if (ray->is_left)
+	// 	next_stp.x--;
 		
 	while (next_stp.x >= 0 && next_stp.x <= (game->scene->w_map * T_SIZE) && next_stp.y >= 0 && next_stp.y <= (game->scene->h_map * T_SIZE))
 	{
-		if (ray_collision(game, next_stp.x, next_stp.y))
+		if (ray_collision(game, next_stp.x - (ray->is_left), next_stp.y))
 		{
 			*is_v_hit = 1;
 			wall_hit.x = next_stp.x;
@@ -168,19 +168,23 @@ void cast_ray(t_game *game, t_ray *ray, int color)
 	t_vec 	wh_h;
 	double 	h_dist;
 	double 	v_dist;
-	// int		is_v_hit;
-	// int		is_h_hit;
+	int		is_v_hit;
+	int		is_h_hit;
 
-	game->rays->is_h_hit = 0;
-	game->rays->is_v_hit = 0;
-	wh_h = h_ray(game, ray, &game->rays->is_h_hit);
-	wh_v = v_ray(game, ray, &game->rays->is_v_hit);
+	is_h_hit = 0;
+	is_v_hit = 0;
+	wh_h = h_ray(game, ray, &is_h_hit);
+	wh_v = v_ray(game, ray, &is_v_hit);
 
-	if (game->rays->is_h_hit)
+	// printf("is_h_hit = %d\n", ray->is_h_hit);
+	// printf("is_v_hit = %d\n", ray->is_v_hit);
+
+	
+	if (is_h_hit)
 		h_dist = get_dist(game->player.x, game->player.y, wh_h.x, wh_h.y);
 	else
 		h_dist = __DBL_MAX__;
-	if (game->rays->is_v_hit)
+	if (is_v_hit)
 		v_dist = get_dist(game->player.x, game->player.y, wh_v.x, wh_v.y);
 	else
 		v_dist = __DBL_MAX__;
@@ -190,15 +194,59 @@ void cast_ray(t_game *game, t_ray *ray, int color)
 		ray->w_hit_x = wh_h.x;
 		ray->w_hit_y = wh_h.y;
 		ray->dist = h_dist;
+		ray->is_v_hit = false;
 	}
 	else
 	{
 		ray->w_hit_x = wh_v.x;
 		ray->w_hit_y = wh_v.y;
 		ray->dist = v_dist;
+		ray->is_v_hit = true;
 	}
 	color *= 0;
 }
+
+// void cast_ray(t_game *game, t_ray *ray, int color)
+// {
+// 	t_vec 	wh_v;
+// 	t_vec 	wh_h;
+// 	double 	h_dist;
+// 	double 	v_dist;
+// 	int		is_v_hit;
+// 	int		is_h_hit;
+
+// 	is_h_hit = 0;
+// 	is_v_hit = 0;
+// 	wh_h = h_ray(game, ray, &is_h_hit);
+// 	wh_v = v_ray(game, ray, &is_v_hit);
+
+// 	printf("is_h_hit = %d\n", is_h_hit);
+// 	printf("is_v_hit = %d\n", is_v_hit);
+
+	
+// 	if (is_h_hit)
+// 		h_dist = get_dist(game->player.x, game->player.y, wh_h.x, wh_h.y);
+// 	else
+// 		h_dist = __DBL_MAX__;
+// 	if (is_v_hit)
+// 		v_dist = get_dist(game->player.x, game->player.y, wh_v.x, wh_v.y);
+// 	else
+// 		v_dist = __DBL_MAX__;
+
+// 	if (h_dist < v_dist)
+// 	{
+// 		ray->w_hit_x = wh_h.x;
+// 		ray->w_hit_y = wh_h.y;
+// 		ray->dist = h_dist;
+// 	}
+// 	else
+// 	{
+// 		ray->w_hit_x = wh_v.x;
+// 		ray->w_hit_y = wh_v.y;
+// 		ray->dist = v_dist;
+// 	}
+// 	color *= 0;
+// }
 
 void	shoot_rays(t_game *game, double angle, int color)
 { 

@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 03:17:38 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/04 02:48:08 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/05 00:28:30 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_player
 typedef struct s_data {
 	void	*img;
 	char	*addr;
+	int		width;
+	int		height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -95,13 +97,14 @@ typedef struct s_ray
 	int		is_down;
 	int		is_left;
 	int		is_right;
-	int		is_v_hit;
-	int		is_h_hit;
+	bool		is_v_hit;
+	// int		is_h_hit;
 	double	w_hit_x;
 	double	w_hit_y;
 	double	dist;
 	double	angle;
 	double	distance_pro; // distance to the projection plane
+	int wall_height;
 	double	projected_wall_height;
 }		t_ray;
 

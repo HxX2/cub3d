@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 23:24:46 by gkarib            #+#    #+#             */
-/*   Updated: 2023/02/25 04:14:46 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/04 18:49:22 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	index_start_map(char *str)
 			while (valid_character(str[i]))
 			{
 				i++;
-				if (str[i] == '\n')
+				if (str[i] == '\n' || !str[i])
 					return (j);
 			}
 			while (str[i] != '\n')
