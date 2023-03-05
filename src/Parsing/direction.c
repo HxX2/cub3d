@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:01:15 by gkarib            #+#    #+#             */
-/*   Updated: 2023/03/03 03:37:56 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/05 00:31:44 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	xpm_file_opened(char *str, char *path, char **dir)
 	x = 0;
 	while (!white_space(path[x]))
 		x++;
-	// *fd = valid_path(path + x);
 	if (!valid_path(path + x))
 	{
 		free(path);
