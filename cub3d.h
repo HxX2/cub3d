@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 03:17:38 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/05 00:28:30 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/09 15:18:27 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,26 @@
 # define KEY_R 15
 
 # define T_SIZE 64
-# define FOV 60 * (M_PI / 180)
+# define FOV 1.0471975512
 # define WIN_W 1920
 # define WIN_H 1080
-# define COL_THICC 1
-# define N_RAYS WIN_W / COL_THICC
+# define N_RAYS WIN_W
 
 typedef struct s_vec
 {
 	double		x;
 	double		y;
 }			t_vec;
+
+typedef struct s_rcast
+{
+	t_vec	wh_v;
+	t_vec	wh_h;
+	double	h_dist;
+	double	v_dist;
+	int		is_v_hit;
+	int		is_h_hit;
+}			t_rcast;
 
 typedef struct s_player
 {
@@ -97,14 +106,18 @@ typedef struct s_ray
 	int		is_down;
 	int		is_left;
 	int		is_right;
-	bool		is_v_hit;
-	// int		is_h_hit;
+
+	t_vec	step;
+	t_vec	intrcp;
+	bool	is_v_hit;
+	bool	is_h_hit;
 	double	w_hit_x;
 	double	w_hit_y;
 	double	dist;
 	double	angle;
-	double	distance_pro; // distance to the projection plane
-	int wall_height;
+
+	int		wall_height;
+	double	distance_pro;
 	double	projected_wall_height;
 }		t_ray;
 
@@ -115,15 +128,16 @@ typedef struct s_game
 	char		*mapfile;
 	t_ray		*rays;
 	t_data		frame;
-	
+	int			mm_dir;
+	double		mm_ang;
+	t_data		n;
 	t_data		north;
 	t_data		south;
 	t_data		west;
 	t_data		east;
-	
 	t_player	player;
 	t_scene		*scene;
-}		t_game; 
+}		t_game;
 
 // ======================PARSING:======================
 
@@ -176,13 +190,28 @@ int		render_frame(t_game *game);
 void	*ft_xalloc(size_t n);
 
 void	put_pxl(t_data *data, int x, int y, int color);
-void	put_sldrect(t_game *game, int x0, int y0, int x1, int y1, int color);
-void	put_sldcir(t_game *game, int x, int y, int radius, int color);
-void	put_line(t_game *game, int x, int y, double angle, int size, int color);
+void	put_sldrectw(t_game *game, t_vec start, t_vec end, int color);
+void	put_sldcir(t_game *game, t_vec center, int radius, int color);
+
 int		in_collision(t_game *game, double dx, double dy);
-void	shoot_ray(t_game *game, int x, int y, double angle, int color);
-void	shoot_rays(t_game *game, double angle, int color);
+void	shoot_rays(t_game *game, double angle);
 int		in_collision(t_game *game, double dx, double dy);
+void	put_minimap(t_game *game);
+
+t_vec	v_wall_hit(t_game *game, t_ray *ray, int *is_v_hit);
+t_vec	h_wall_hit(t_game *game, t_ray *ray, int *is_h_hit);
+t_vec	h_ray(t_game *game, t_ray *ray, int *is_h_hit);
+t_vec	v_ray(t_game *game, t_ray *ray, int *is_v_hit);
+
+void	ray_init(t_game *game, double r_angle, int i);
+double	normalize_ang(double angle);
+int		ray_collision(t_game *game, double dx, double dy);
+double	get_dist(double x1, double y1, double x2, double y2);
+
+void	put_image_to_image(int *big_img, int *small_img, int x, int y);
+void	rot_pxl(int *x, int *y, double angle);
+int		in_collision(t_game *game, double dx, double dy);
+void	put_cf(t_game *game);
 
 void	project_wall(t_game *game);
 
