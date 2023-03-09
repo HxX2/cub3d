@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+         #
+#    By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 19:58:45 by zlafou            #+#    #+#              #
-#    Updated: 2023/03/04 18:48:10 by gkarib           ###   ########.fr        #
+#    Updated: 2023/03/09 15:42:49 by zlafou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME			= cub3D
 
 PARSING			= utils_parsing.c valid_file.c convert_file.c component.c check_walls.c direction.c colors.c parse.c
 
-UTILS			= mem.c
+UTILS			= mem.c ray_utils.c gl_utils.c primitives.c
 
-GAME			= events.c init.c primitives.c raycasting.c 3D_implementetion.c
+GAME			= events.c init.c raycasting.c 3d_projection.c minimap.c vh_rays.c
 
 SRCS			= cub3d.c $(PARSING) $(GAME) $(UTILS)
 
@@ -24,7 +24,7 @@ OBJS			= $(SRCS:.c=.o)
 
 CC				= cc
 
-CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror
 
 MLX				= -lmlx -framework OpenGL -framework AppKit
 

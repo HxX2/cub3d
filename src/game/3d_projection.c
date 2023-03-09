@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3D_implementetion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 00:04:26 by gkarib            #+#    #+#             */
-/*   Updated: 2023/03/05 00:29:35 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/09 08:03:33 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	texture(t_game *game, int top_pix, int bottom_pix, int x)
 	}
 }
 
-void	get_mlx_data(t_game *game)
+void	load_textures(t_game *game)
 {
 	game->north.img = mlx_xpm_file_to_image(game->mlx, game->scene->no_path,
 			&game->north.width, &game->north.height);
@@ -94,7 +94,7 @@ void	project_wall(t_game *game)
 	int		bottom_pix;
 	double	perp_dist;
 
-	get_mlx_data(game);
+	load_textures(game);
 	x = -1;
 	while (++x < N_RAYS)
 	{
@@ -110,7 +110,6 @@ void	project_wall(t_game *game)
 		bottom_pix = (WIN_H / 2) + (game->rays[x].wall_height / 2);
 		if (bottom_pix > WIN_H)
 			bottom_pix = WIN_H;
-		put_sldrect (game, x, top_pix, x + 1, bottom_pix, 0xFFFFFF);
 		texture(game, top_pix, bottom_pix, x);
 	}
 }
