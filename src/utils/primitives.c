@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   primitives.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:27:43 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/02 02:01:06 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/09 11:06:55 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,54 +22,40 @@ void	put_pxl(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	put_sldrect(t_game *game, int x0, int y0, int x1, int y1, int color)
-{
-	int	x;
-	int	y;
-
-	y = y0;
-	while (y < y1)
-	{
-		x = x0;
-		while (x < x1)
-		{
-			put_pxl(&game->frame, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	put_sldcir(t_game *game, int x, int y, int radius, int color)
+void	put_sldrectw(t_game *game, t_vec start, t_vec end, int color)
 {
 	int	i;
 	int	j;
 
-	i = x - radius;
-	while (i <= x + radius)
+	j = start.y;
+	while (j < end.y)
 	{
-		j = y - radius;
-		while (j <= y + radius)
+		i = start.x;
+		while (i < end.x)
 		{
-			if ((i - x) * (i - x) + (j - y) * (j - y) <= radius * radius)
+			put_pxl(&game->frame, i, j, color);
+			i++;
+		}
+		j++;
+	}
+}
+
+void	put_sldcir(t_game *game, t_vec center, int radius, int color)
+{
+	int	i;
+	int	j;
+
+	i = center.x - radius;
+	while (i <= center.x + radius)
+	{
+		j = center.y - radius;
+		while (j <= center.y + radius)
+		{
+			if ((i - center.x) * (i - center.x) + (j - center.y) * (j
+					- center.y) <= radius * radius)
 				put_pxl(&game->frame, i, j, color);
 			j++;
 		}
 		i++;
 	}
-}
-
-void	put_line(t_game *game, int x, int y, double angle,int size, int color)
-{
-	int i;
-	double dx;
-	double dy;
-
-    i = 1;
-    while (i < size) {
-        dx = cos(angle) * i;
-        dy = sin(angle) * i;
-		put_pxl(&game->frame, dx+x, dy+y, color);
-        i++;
-    }
 }
