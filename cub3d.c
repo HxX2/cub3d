@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:37:05 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/09 11:22:26 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/09 17:06:22 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	red_cross(void)
-{
-	exit(1);
-}
-
-int	esc_key(int keycode)
-{
-	if (keycode == KEY_ESC)
-		exit(1);
-	return (0);
-}
 
 int	main(int ac, char **av)
 {
@@ -41,6 +29,8 @@ int	main(int ac, char **av)
 	init_player(&game);
 	mlx_hook(game.win, EVENT_KEY_PRESS, 0, key_press, &game);
 	mlx_hook(game.win, EVENT_KEY_RELEASE, 0, key_release, &game);
+	mlx_hook(game.win, ON_MOUSEDOWN, 0, click_mouse, &game);
+	mlx_hook(game.win, ON_MOUSEUP, 0, unclick_mouse, &game);
 	mlx_loop_hook(game.mlx, render_frame, &game);
 	mlx_hook(game.win, EVENT_CLOSE, 0, red_cross, 0);
 	mlx_loop(game.mlx);
