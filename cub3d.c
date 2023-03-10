@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:37:05 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/10 21:40:33 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/10 23:07:48 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 		return (printf("Wrong number of argument!\n"));
 	init_game(&game);
 	init_player(&game);
+	load_textures(&game);
 	mlx_hook(game.win, EVENT_KEY_PRESS, 0, key_press, &game);
 	mlx_hook(game.win, EVENT_KEY_RELEASE, 0, key_release, &game);
 	mlx_hook(game.win, ON_MOUSEDOWN, 0, click_mouse, &game);

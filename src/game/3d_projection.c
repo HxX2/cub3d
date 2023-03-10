@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3d_projection.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 00:04:26 by gkarib            #+#    #+#             */
-/*   Updated: 2023/03/10 13:03:09 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/10 23:09:45 by zlafou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,33 +63,6 @@ void	texture(t_game *game, int top_pix, int bottom_pix, int x)
 	}
 }
 
-void	load_textures(t_game *game)
-{
-	game->north.img = mlx_xpm_file_to_image(game->mlx, game->scene->no_path,
-			&game->north.width, &game->north.height);
-	game->south.img = mlx_xpm_file_to_image(game->mlx, game->scene->so_path,
-			&game->south.width, &game->south.height);
-	game->west.img = mlx_xpm_file_to_image(game->mlx, game->scene->we_path,
-			&game->west.width, &game->west.height);
-	game->east.img = mlx_xpm_file_to_image(game->mlx, game->scene->ea_path,
-			&game->east.width, &game->east.height);
-	if (!game->north.img || !game->south.img
-		|| !game->west.img || !game->east.img)
-		exit(printf ("Error: related with the content of the xpm file"));
-	game->north.addr = mlx_get_data_addr(game->north.img,
-			&game->north.bits_per_pixel, &game->north.line_length,
-			&game->north.endian);
-	game->south.addr = mlx_get_data_addr(game->south.img,
-			&game->south.bits_per_pixel, &game->south.line_length,
-			&game->south.endian);
-	game->west.addr = mlx_get_data_addr(game->west.img,
-			&game->west.bits_per_pixel, &game->west.line_length,
-			&game->west.endian);
-	game->east.addr = mlx_get_data_addr(game->east.img,
-			&game->east.bits_per_pixel, &game->east.line_length,
-			&game->east.endian);
-}
-
 void	project_wall(t_game *game)
 {
 	int		x;
@@ -97,7 +70,6 @@ void	project_wall(t_game *game)
 	int		bottom_pix;
 	double	perp_dist;
 
-	load_textures(game);
 	x = -1;
 	while (++x < N_RAYS)
 	{
