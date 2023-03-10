@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+         #
+#    By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 19:58:45 by zlafou            #+#    #+#              #
-#    Updated: 2023/03/09 15:42:49 by zlafou           ###   ########.fr        #
+#    Updated: 2023/03/10 21:53:06 by gkarib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ PARSING			= utils_parsing.c valid_file.c convert_file.c component.c check_walls.
 
 UTILS			= mem.c ray_utils.c gl_utils.c primitives.c
 
-GAME			= events.c init.c raycasting.c 3d_projection.c minimap.c vh_rays.c
+GAME			= events.c init.c raycasting.c 3d_projection.c minimap.c vh_rays.c hook_events.c
 
 SRCS			= cub3d.c $(PARSING) $(GAME) $(UTILS)
 
@@ -24,7 +24,7 @@ OBJS			= $(SRCS:.c=.o)
 
 CC				= cc
 
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror 
 
 MLX				= -lmlx -framework OpenGL -framework AppKit
 
@@ -37,6 +37,8 @@ FOOTER			= "\033[0;35m➔\033[0;0m type \033[0;34m./$(NAME)\033[0;0m to run the 
 vpath $(SRCS) $(VPATH)
 
 all: $(NAME) | footer
+ 
+bonus: all
 
 header :
 	@echo

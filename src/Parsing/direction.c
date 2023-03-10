@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:01:15 by gkarib            #+#    #+#             */
-/*   Updated: 2023/03/05 00:31:44 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/10 12:12:43 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_directions(t_scene *cub, char *str)
 	y = search_line(cub, str);
 	if (y == -1)
 		exit(printf("Error: Line -%s- not found\n", str));
-	line = ft_strtrim(cub->scene[y], " ");
+	line = ft_strtrim(cub->scene[y], " \t");
 	if (ft_strncmp(line, str, 2))
 	{
 		free (line);
