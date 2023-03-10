@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 00:59:20 by gkarib            #+#    #+#             */
-/*   Updated: 2023/03/02 20:05:19 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/10 12:18:49 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ int	valid_color(t_scene *cub, char *str, char *color_line)
 		exit(printf("Error: Wrong number of commas!\n"));
 	rgb_str = ft_split(color_line, ',');
 	if (ft_ptrlen(rgb_str) != 3)
-		exit (printf("Error: Wrong number of digits!\n"));
+		exit(printf("Error: Wrong number of digits!\n"));
 	free(color_line);
 	while (rgb_str[i])
 	{
-		tmp = ft_strtrim(rgb_str[i], " ");
+		tmp = ft_strtrim(rgb_str[i], " \t");
 		clamp_digit(rgb_str, tmp, i);
 		rgb_hexa(cub, str, tmp, i);
 		i++;
@@ -90,17 +90,17 @@ int	ft_colors(t_scene *cub, char *str)
 	y = search_line(cub, str);
 	if (y == -1)
 		exit(printf("Error: Line -%s- not found\n", str));
-	line = ft_strtrim(cub->scene[y], " ");
+	line = ft_strtrim(cub->scene[y], " \t");
 	if (ft_strncmp(line, str, 1))
 	{
-		free (line);
+		free(line);
 		exit(printf("Error: There isn't only white spaces before -%s-\n", str));
 	}
 	color_line = ft_substr(line, 1, ft_strlen(line) - 1);
 	free(line);
 	if (white_space(*color_line))
 	{
-		free (color_line);
+		free(color_line);
 		exit(printf("Error: No space after \"%s\"!\n", str));
 	}
 	valid_color(cub, str, color_line);

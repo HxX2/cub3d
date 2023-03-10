@@ -6,7 +6,7 @@
 #    By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/17 19:58:45 by zlafou            #+#    #+#              #
-#    Updated: 2023/03/09 16:53:58 by gkarib           ###   ########.fr        #
+#    Updated: 2023/03/10 21:53:06 by gkarib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJS			= $(SRCS:.c=.o)
 
 CC				= cc
 
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror 
 
 MLX				= -lmlx -framework OpenGL -framework AppKit
 
@@ -37,6 +37,8 @@ FOOTER			= "\033[0;35m➔\033[0;0m type \033[0;34m./$(NAME)\033[0;0m to run the 
 vpath $(SRCS) $(VPATH)
 
 all: $(NAME) | footer
+ 
+bonus: all
 
 header :
 	@echo
