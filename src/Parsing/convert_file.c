@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 01:46:55 by gkarib            #+#    #+#             */
-/*   Updated: 2023/03/05 00:31:18 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/10 00:49:27 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	split_scene(t_scene *cub, char *map)
 	cub->scene = ft_split(map, '\n');
 	free(map);
 	if (!ft_ptrlen(cub->scene))
-		exit (printf("Empty File!"));
+		exit (printf("Error: Empty File!"));
 }
 
 void	import_scene(int fd, t_scene *cub)

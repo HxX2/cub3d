@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zlafou <zlafou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 20:47:14 by zlafou            #+#    #+#             */
-/*   Updated: 2023/03/09 11:22:00 by zlafou           ###   ########.fr       */
+/*   Updated: 2023/03/10 00:45:05 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	init_game(t_game *game)
 	game->rays = ft_xalloc(N_RAYS * sizeof(t_ray));
 	game->n.img = mlx_xpm_file_to_image(game->mlx, "assets/N.xpm",
 			&game->n.width, &game->n.height);
+	if (!game->n.img)
+		exit (printf("Error: related with the -n- xpm file"));
 	game->n.addr = mlx_get_data_addr(game->n.img,
 			&game->n.bits_per_pixel, &game->n.line_length,
 			&game->n.endian);

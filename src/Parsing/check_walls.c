@@ -6,7 +6,7 @@
 /*   By: gkarib <gkarib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 23:24:46 by gkarib            #+#    #+#             */
-/*   Updated: 2023/03/04 18:49:22 by gkarib           ###   ########.fr       */
+/*   Updated: 2023/03/10 12:14:20 by gkarib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ptrlen_wall(t_scene *cub)
 	while (++y < ft_ptrlen(cub->map))
 	{
 		x = 0;
-		while (cub->map[y][x] == ' ' || cub->map[y][x] == '\t')
+		while (!white_space(cub->map[y][x]))
 			x++;
 		if (cub->map[y][x] != '1' && white_space(cub->map[y][x]))
 			return (0);
